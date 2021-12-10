@@ -1,0 +1,23 @@
+kind: BuildConfig
+apiVersion: build.openshift.io/v1
+metadata:
+  name: testblog
+  labels:
+    app.kubernetes.io/name: testblog  
+spec:
+  nodeSelector: null
+  output:
+    to:
+      kind: DockerImage
+      name: 'docker.io/"Your DockerHub ID"/testblog:latest'
+  strategy:
+    type: Docker
+    dockerStrategy:      
+      dockerfilePath: Dockerfile
+  postCommit: {}
+  source:
+    type: Binary
+    binary: {}
+  runPolicy: Serial
+status:
+  lastVersion: 9
