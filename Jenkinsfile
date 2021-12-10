@@ -55,7 +55,7 @@ pipeline {
                 set +x
                 export GIT_SSH_COMMAND="ssh -oStrictHostKeyChecking=no"
                 git config --global user.email "test@gmail.com"
-                git checkout main
+                git checkout master
                 cd okd-deploy
                 cp --f deployment-sample.yaml temp.yaml                
                 sed -i 's/BUILD_NUMBER/1.0.0.1/' temp.yaml 
