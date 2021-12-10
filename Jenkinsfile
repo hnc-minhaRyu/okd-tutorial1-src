@@ -39,5 +39,32 @@ pipeline {
             binaryBuild(buildConfigName: appName, buildFromPath: ".")
         }
     }
+    stage("Update Tag") { 
+      steps {
+        checkout([$class: 'GitSCM',
+                        branches: [[name: '*/master' ]],
+                        extensions: scm.extensions,
+                        userRemoteConfigs: [[
+                            url: 'git@github.com:blackwhale-testuser/okd-tutorial1-gitops.git',
+                            credentialsId: 'jenkins-ssh-private',
+                        ]]
+                ])
+        sshagent(credentials: ['jenkins-ssh-private']){
+            sh("""
+                #!/usr/bin/env bash
+                set +x
+                export GIT_SSH_COMMAND="ssh -oStrictHostKeyChecking=no"
+                git config --global user.email "test@gmail.com"
+                git checkout main
+                cd okd-deploy
+                cp --f deployment-sample.yaml temp.yaml                
+                sed -i 's/BUILD_NUMBER/1.0.0.1/' temp.yaml 
+                cat temp.yaml
+                cp --f temp.yaml testblog-deployment.yaml 
+                git commit -a -m "updated the image tag"
+                git push
+            """)
+        }
+       }
   }
 }
