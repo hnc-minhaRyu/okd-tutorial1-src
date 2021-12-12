@@ -57,7 +57,7 @@ pipeline {
                 git config --global user.email "test@gmail.com"
                 git checkout master
                 cd okd-deploy
-                cp --f ../base/deployment-sample.yaml temp.yaml                
+                cp --f ~/base/deployment-sample.yaml temp.yaml                
                 sed -i 's/BUILD_NUMBER/1.0.0.1/' temp.yaml 
                 cat temp.yaml
                 cp --f temp.yaml testblog-deployment.yaml 
