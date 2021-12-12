@@ -6,8 +6,7 @@ retriever: modernSCM(
   ]
 )
 
-// The name you want to give your Spring Boot application
-// Each resource related to your app will be given this name
+// OKD의 Buildconifg의 이름과 일치시켜야 한다. 
 appName = "testblog"
 
 pipeline {
@@ -56,8 +55,8 @@ pipeline {
                 export GIT_SSH_COMMAND="ssh -oStrictHostKeyChecking=no"
                 git config --global user.email "test@gmail.com"
                 git checkout master
+                cp --f base/deployment-sample.yaml okd-deploy/temp.yaml
                 cd okd-deploy
-                cp --f ~/base/deployment-sample.yaml temp.yaml                
                 sed -i 's/BUILD_NUMBER/1.0.0.1/' temp.yaml 
                 cat temp.yaml
                 cp --f temp.yaml testblog-deployment.yaml 
