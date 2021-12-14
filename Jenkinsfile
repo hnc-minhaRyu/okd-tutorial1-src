@@ -53,7 +53,7 @@ pipeline {
                 #!/usr/bin/env bash
                 set +x
                 export GIT_SSH_COMMAND="ssh -oStrictHostKeyChecking=no"
-                git config --global user.email "test@gmail.com"
+                git config --global user.email "blackwhale-testuser@hancom.com"
                 git checkout master
                 cp --f base/deployment-sample.yaml okd-deploy/temp.yaml
                 cd okd-deploy
