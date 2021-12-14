@@ -55,11 +55,10 @@ pipeline {
                 export GIT_SSH_COMMAND="ssh -oStrictHostKeyChecking=no"
                 git config --global user.email "blackwhale-testuser@hancom.com"
                 git checkout master
-                cp --f base/deployment-sample.yaml okd-deploy/temp.yaml
+                cp --f base/deployment-sample.yaml okd-deploy/testblog-deployment.yaml 
                 cd okd-deploy
-                sed -i 's/MY_BUILD_TAG/test.1/' temp.yaml 
-                cat temp.yaml
-                cp --f temp.yaml testblog-deployment.yaml 
+                sed -i 's/MY_BUILD_TAG/test.1/' testblog-deployment.yaml  
+                cat testblog-deployment.yaml 
                 git commit -a -m "updated the image tag"
                 git push
             """)
