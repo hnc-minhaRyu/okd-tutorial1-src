@@ -44,7 +44,7 @@ pipeline {
                         branches: [[name: '*/master' ]],
                         extensions: scm.extensions,
                         userRemoteConfigs: [[
-                            url: 'git@github.com:blackwhale-testuser/okd-tutorial1-gitops.git',
+                            url: 'git@github.com:hnc-minhaRyu/okd-tutorial1-gitops.git',
                             credentialsId: 'jenkins-ssh-private',
                         ]]
                 ])
